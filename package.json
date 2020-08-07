@@ -1,0 +1,37 @@
+{
+  "name": "@raydeck/serverless-switch",
+  "version": "1.0.0",
+  "description": "Switch between names and stages within a monorepo",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && chmod +x lib/bin.js",
+    "docs": "commanderdoc markdown lib/bin.js -o README.md -n serverless-switch"
+  },
+  "author": "Ray Deck",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@raydeck/dependency-tree-resolver": "^1.0.7",
+    "@raydeck/livelink": "^1.5.2",
+    "@raydeck/serverless-base": "^1.0.2",
+    "commander": "^6.0.0",
+    "dependency-tree-resolver": "^1.0.3"
+  },
+  "bin": {
+    "switch": "./lib/bin.js",
+    "serverless-switch": "./lib/bin.js"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "commanderdoc": "^0.1.7",
+    "concat-md": "^0.3.5",
+    "typedoc": "^0.17.8",
+    "typedoc-plugin-markdown": "^2.4.0",
+    "typescript": "^3.9.7"
+  },
+  "liveLink": {
+    "liveLinks": {
+      "commanderdoc": "../GitHub/commander-inspect"
+    }
+  }
+}

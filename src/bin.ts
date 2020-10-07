@@ -34,7 +34,12 @@ const setup = (dir: string) => {
     console.log(`Setting up ${dir}`);
     spawnSync("yarn", [], { stdio: "inherit" });
     spawnSync("npx", ["fix-local-dependencies"], { stdio: "inherit" });
-    spawnSync("yarn", ["setup"], { stdio: "inherit" });
+    try {
+      spawnSync("yarn", ["setup"], { stdio: "inherit" });
+    } catch (e) {
+      console.log("Executing fallback: setup via serverless-stage");
+      spawnSync("yarn", ["serverless-stage", "setup"], { stdio: "inherit" });
+    }
     console.log(`Finished setting up ${dir}`);
   } catch (e) {}
 };
@@ -67,12 +72,10 @@ commander.parse(process.argv);
 export { commander };
 if (!commander.isDocumenting) {
   const o = getServerlessConfig(commander.path);
+  console.log(o);
   const { deploy } = <{ deploy: string[] }>o;
   const name =
-    (commander.base && basename(path)) ||
-    commander.args[0] ||
-    o.serverless.name ||
-    o.name;
+    (commander.base && basename(path)) || commander.args[0] || o.name;
 
   const { stage: baseStage, skipSetup } = commander;
   const stage: stages =

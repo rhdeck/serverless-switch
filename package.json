@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && chmod +x lib/bin.js",
+    "build": "tsc && chmod +x lib/bin.js && yarn pack -f package.tgz",
     "docs": "commanderdoc markdown lib/bin.js -o README.md -n serverless-switch",
     "prepublishOnly": " yarn build && yarn docs && git commit README.md -m \"docs: updating readme\" ; echo \"Done\""
   },
